@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "image": "/images/gallery/gallery-01.jpg",
+    "category": "Wedding"
+  },
+  {
+    "id": 2,
+    "image": "/images/gallery/gallery-02.jpg",
+    "category": "Wedding"
+  },
+  {
+    "id": 3,
+    "image": "/images/gallery/gallery-03.jpg",
+    "category": "Decoration"
+  },
+  {
+    "id": 4,
+    "image": "/images/gallery/gallery-04.jpg",
+    "category": "Bridal"
+  },
+  {
+    "id": 5,
+    "image": "/images/gallery/gallery-05.jpg",
+    "category": "Photography"
+  }
+]

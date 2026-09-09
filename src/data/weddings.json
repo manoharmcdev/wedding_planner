@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "couple": "Ananya & Rahul",
+    "location": "Bangalore",
+    "image": "/images/weddings/wedding-01.jpg",
+    "description": "An elegant traditional wedding celebration."
+  },
+  {
+    "id": 2,
+    "couple": "Priya & Arjun",
+    "location": "Hyderabad",
+    "image": "/images/weddings/wedding-02.jpg",
+    "description": "A beautiful modern wedding celebration."
+  },
+  {
+    "id": 3,
+    "couple": "Meera & Karthik",
+    "location": "Chennai",
+    "image": "/images/weddings/wedding-03.jpg",
+    "description": "A colorful and memorable wedding."
+  }
+]

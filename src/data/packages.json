@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "vendorId": 1,
+    "name": "Silver Package",
+    "price": 45000,
+    "description": "Essential wedding photography package.",
+    "services": [
+      "1 Photographer",
+      "1 Videographer",
+      "300 Edited Photos",
+      "Traditional Wedding Video"
+    ]
+  },
+  {
+    "id": 2,
+    "vendorId": 1,
+    "name": "Gold Package",
+    "price": 75000,
+    "description": "Complete photography and cinematography package.",
+    "services": [
+      "2 Photographers",
+      "2 Videographers",
+      "500 Edited Photos",
+      "Cinematic Video",
+      "Wedding Album"
+    ]
+  },
+  {
+    "id": 3,
+    "vendorId": 1,
+    "name": "Platinum Package",
+    "price": 120000,
+    "description": "Premium full wedding coverage package.",
+    "services": [
+      "3 Photographers",
+      "2 Videographers",
+      "Drone Coverage",
+      "800 Edited Photos",
+      "Cinematic Film",
+      "Premium Album"
+    ]
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "brand": {
+    "name": "WedNest",
+    "shortName": "WedNest",
+    "logoText": "WedNest",
+    "tagline": "Everything you need to plan your perfect wedding"
+  },
+  "colors": {
+    "primary": "#B23A5B",
+    "primaryDark": "#8F2947",
+    "primaryLight": "#F9E8ED",
+    "secondary": "#F4D8C8",
+    "gold": "#B08A57",
+    "background": "#FFFAF7",
+    "card": "#FFFFFF",
+    "text": "#292524",
+    "mutedText": "#78716C",
+    "border": "#EADFD9",
+    "success": "#2F855A",
+    "warning": "#B7791F",
+    "danger": "#C53030"
+  },
+  "header": {
+    "background": "#FFFFFF",
+    "text": "#292524",
+    "activeText": "#B23A5B",
+    "border": "#EADFD9",
+    "buttonBackground": "#B23A5B",
+    "buttonText": "#FFFFFF"
+  },
+  "footer": {
+    "background": "#292524",
+    "text": "#FFFFFF",
+    "mutedText": "#D6D3D1",
+    "border": "#44403C"
+  },
+  "layout": {
+    "maxWidth": "1280px",
+    "sectionPaddingDesktop": "80px",
+    "sectionPaddingTablet": "60px",
+    "sectionPaddingMobile": "40px"
+  },
+  "borderRadius": {
+    "small": "8px",
+    "medium": "12px",
+    "card": "16px",
+    "large": "24px",
+    "button": "9999px"
+  }
+}

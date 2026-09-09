@@ -1,0 +1,169 @@
+[
+  {
+    "vendorId": "vendor-001",
+    "about": "Royal Wedding Photography captures elegant and emotional wedding moments with a premium photography experience.",
+    "experience": "10+ years",
+    "services": [
+      "Wedding Photography",
+      "Candid Photography",
+      "Traditional Photography",
+      "Wedding Cinematography",
+      "Pre-Wedding Photography",
+      "Album Design"
+    ],
+    "highlights": [
+      "Experienced photography team",
+      "Candid and traditional coverage",
+      "Premium wedding albums"
+    ],
+    "gallery": [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "reviews": [
+      {
+        "id": "review-001",
+        "customerName": "Ananya & Rahul",
+        "rating": 5,
+        "comment": "Amazing photography team. They captured every important moment beautifully.",
+        "verified": true
+      },
+      {
+        "id": "review-002",
+        "customerName": "Priya",
+        "rating": 5,
+        "comment": "Very professional and creative. The wedding album was beautiful.",
+        "verified": true
+      },
+      {
+        "id": "review-003",
+        "customerName": "Karthik",
+        "rating": 4.8,
+        "comment": "Great experience from the pre-wedding shoot to the wedding day.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "vendorId": "vendor-002",
+    "about": "Dream Moments Studio creates timeless wedding photographs and films with a modern storytelling approach.",
+    "experience": "8+ years",
+    "services": [
+      "Wedding Photography",
+      "Candid Photography",
+      "Wedding Films",
+      "Pre-Wedding Shoots",
+      "Traditional Photography",
+      "Photo Albums"
+    ],
+    "highlights": [
+      "Modern cinematic style",
+      "Professional photography crew",
+      "Creative pre-wedding shoots"
+    ],
+    "gallery": [
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1507504031003-b417219a0fde?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "reviews": [
+      {
+        "id": "review-004",
+        "customerName": "Sneha & Arjun",
+        "rating": 5,
+        "comment": "The team was friendly, creative and extremely professional.",
+        "verified": true
+      },
+      {
+        "id": "review-005",
+        "customerName": "Meghana",
+        "rating": 4.8,
+        "comment": "Loved the cinematic wedding video and candid photographs.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "vendorId": "vendor-003",
+    "about": "The Wedding Story specialises in luxury wedding photography with a strong focus on natural emotions and storytelling.",
+    "experience": "9+ years",
+    "services": [
+      "Candid Photography",
+      "Wedding Photography",
+      "Pre-Wedding Photography",
+      "Wedding Films",
+      "Traditional Coverage",
+      "Luxury Albums"
+    ],
+    "highlights": [
+      "Luxury wedding coverage",
+      "Natural candid photography",
+      "Premium album designs"
+    ],
+    "gallery": [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "reviews": [
+      {
+        "id": "review-006",
+        "customerName": "Divya & Nikhil",
+        "rating": 5,
+        "comment": "Absolutely loved the final wedding photographs.",
+        "verified": true
+      },
+      {
+        "id": "review-007",
+        "customerName": "Aishwarya",
+        "rating": 4.9,
+        "comment": "Beautiful work and excellent coordination throughout the wedding.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "vendorId": "vendor-004",
+    "about": "Elegant Frames provides elegant wedding photography and cinematic films designed around each couple's unique story.",
+    "experience": "7+ years",
+    "services": [
+      "Wedding Photography",
+      "Pre-Wedding Photography",
+      "Candid Photography",
+      "Traditional Photography",
+      "Wedding Films",
+      "Album Design"
+    ],
+    "highlights": [
+      "Personalised wedding coverage",
+      "Candid photography",
+      "Cinematic wedding films"
+    ],
+    "gallery": [
+      "https://images.unsplash.com/photo-1507504031003-b417219a0fde?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "reviews": [
+      {
+        "id": "review-008",
+        "customerName": "Pooja & Vivek",
+        "rating": 5,
+        "comment": "Wonderful experience and beautiful photographs.",
+        "verified": true
+      },
+      {
+        "id": "review-009",
+        "customerName": "Rohit",
+        "rating": 4.8,
+        "comment": "Very responsive team and excellent wedding coverage.",
+        "verified": true
+      }
+    ]
+  }
+]

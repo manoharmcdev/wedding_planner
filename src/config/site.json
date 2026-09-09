@@ -1,0 +1,40 @@
+{
+  "name": "WedNest",
+  "shortName": "WedNest",
+  "tagline": "Plan Your Dream Wedding",
+  "description": "Find the perfect wedding vendors, venues and services for your special day.",
+
+  "navigation": [
+    {
+      "label": "Venues",
+      "href": "/venues"
+    },
+    {
+      "label": "Vendors",
+      "href": "/vendors"
+    },
+    {
+      "label": "Photos",
+      "href": "/photos"
+    },
+    {
+      "label": "Real Weddings",
+      "href": "/real-weddings"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog"
+    }
+  ],
+
+  "contact": {
+    "email": "hello@wednest.com",
+    "phone": "+91 90000 00000"
+  },
+
+  "social": {
+    "instagram": "#",
+    "facebook": "#",
+    "youtube": "#"
+  }
+}

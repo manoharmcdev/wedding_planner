@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "How to Choose the Perfect Wedding Photographer",
+    "slug": "how-to-choose-wedding-photographer",
+    "category": "Photography",
+    "image": "/images/blogs/blog-01.jpg",
+    "excerpt": "Important things to consider before choosing your wedding photographer."
+  },
+  {
+    "id": 2,
+    "title": "Beautiful Wedding Decoration Ideas",
+    "slug": "beautiful-wedding-decoration-ideas",
+    "category": "Decoration",
+    "image": "/images/blogs/blog-02.jpg",
+    "excerpt": "Explore elegant wedding decoration ideas for your special day."
+  },
+  {
+    "id": 3,
+    "title": "Bridal Makeup Trends",
+    "slug": "bridal-makeup-trends",
+    "category": "Makeup",
+    "image": "/images/blogs/blog-03.jpg",
+    "excerpt": "Discover beautiful bridal makeup styles for modern weddings."
+  }
+]

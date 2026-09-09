@@ -1,0 +1,44 @@
+[
+  {
+    "id": "cat-001",
+    "name": "Wedding Venues",
+    "slug": "wedding-venues",
+    "description": "Beautiful venues for your special celebration.",
+    "image": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "cat-002",
+    "name": "Photographers",
+    "slug": "photographers",
+    "description": "Capture every beautiful moment of your wedding.",
+    "image": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "cat-003",
+    "name": "Makeup Artists",
+    "slug": "makeup-artists",
+    "description": "Find talented artists for your perfect bridal look.",
+    "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "cat-004",
+    "name": "Wedding Decor",
+    "slug": "wedding-decor",
+    "description": "Transform your celebration with beautiful decor.",
+    "image": "https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "cat-005",
+    "name": "Mehndi Artists",
+    "slug": "mehndi-artists",
+    "description": "Discover beautiful mehndi designs and artists.",
+    "image": "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    "id": "cat-006",
+    "name": "Wedding Caterers",
+    "slug": "wedding-caterers",
+    "description": "Delicious food and memorable dining experiences.",
+    "image": "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=900&q=85"
+  }
+]

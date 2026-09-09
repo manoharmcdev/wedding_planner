@@ -1,0 +1,222 @@
+[
+  {
+    "id": "vendor-001",
+    "name": "Royal Wedding Photography",
+    "slug": "royal-wedding-photography",
+    "category": "Photographers",
+    "subcategory": "Wedding Photography",
+    "location": "Bangalore",
+    "rating": 4.9,
+    "reviewCount": 128,
+    "startingPrice": 45000,
+    "verified": true,
+    "featured": true,
+    "description": "Elegant wedding photography focused on timeless moments and beautiful storytelling.",
+    "coverImage": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/royalweddingphotography",
+    "whatsapp": "919876543201",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-002",
+    "name": "Dream Moments Studio",
+    "slug": "dream-moments-studio",
+    "category": "Photographers",
+    "subcategory": "Wedding Photography",
+    "location": "Hyderabad",
+    "rating": 4.8,
+    "reviewCount": 96,
+    "startingPrice": 55000,
+    "verified": true,
+    "featured": true,
+    "description": "Creative wedding photography and cinematic storytelling for unforgettable celebrations.",
+    "coverImage": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/dreammomentsstudio",
+    "whatsapp": "919876543202",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-003",
+    "name": "The Wedding Story",
+    "slug": "the-wedding-story",
+    "category": "Photographers",
+    "subcategory": "Candid Photography",
+    "location": "Bangalore",
+    "rating": 4.9,
+    "reviewCount": 154,
+    "startingPrice": 65000,
+    "verified": true,
+    "featured": true,
+    "description": "Candid wedding photography capturing genuine emotions, laughter and unforgettable memories.",
+    "coverImage": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/theweddingstory",
+    "whatsapp": "919876543203",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-004",
+    "name": "Elegant Frames",
+    "slug": "elegant-frames",
+    "category": "Photographers",
+    "subcategory": "Pre Wedding Photography",
+    "location": "Chennai",
+    "rating": 4.7,
+    "reviewCount": 82,
+    "startingPrice": 40000,
+    "verified": true,
+    "featured": true,
+    "description": "Elegant pre-wedding and wedding photography with a modern editorial style.",
+    "coverImage": "https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/elegantframes",
+    "whatsapp": "919876543204",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-005",
+    "name": "Blush Bridal Studio",
+    "slug": "blush-bridal-studio",
+    "category": "Makeup Artists",
+    "subcategory": "Bridal Makeup",
+    "location": "Bangalore",
+    "rating": 4.8,
+    "reviewCount": 112,
+    "startingPrice": 18000,
+    "verified": true,
+    "featured": true,
+    "description": "Luxury bridal makeup services designed around your personality and wedding style.",
+    "coverImage": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/blushbridalstudio",
+    "whatsapp": "919876543205",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-006",
+    "name": "Glow & Grace Makeup",
+    "slug": "glow-and-grace-makeup",
+    "category": "Makeup Artists",
+    "subcategory": "Bridal Makeup",
+    "location": "Hyderabad",
+    "rating": 4.7,
+    "reviewCount": 76,
+    "startingPrice": 16000,
+    "verified": true,
+    "featured": false,
+    "description": "Professional bridal makeup with personalized looks for every wedding ceremony.",
+    "coverImage": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/glowandgracemakeup",
+    "whatsapp": "919876543206",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-007",
+    "name": "Royal Palace Convention",
+    "slug": "royal-palace-convention",
+    "category": "Wedding Venues",
+    "subcategory": "Convention Hall",
+    "location": "Bangalore",
+    "rating": 4.9,
+    "reviewCount": 203,
+    "startingPrice": 120000,
+    "verified": true,
+    "featured": true,
+    "description": "A grand wedding venue with elegant interiors, spacious halls and premium facilities.",
+    "coverImage": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/royalpalaceconvention",
+    "whatsapp": "919876543207",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-008",
+    "name": "Grand Orchid Banquet",
+    "slug": "grand-orchid-banquet",
+    "category": "Wedding Venues",
+    "subcategory": "Banquet Hall",
+    "location": "Chennai",
+    "rating": 4.6,
+    "reviewCount": 91,
+    "startingPrice": 95000,
+    "verified": true,
+    "featured": false,
+    "description": "Beautiful banquet venue perfect for intimate and large wedding celebrations.",
+    "coverImage": "https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/grandorchidbanquet",
+    "whatsapp": "919876543208",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-009",
+    "name": "Petals & Lights Decor",
+    "slug": "petals-and-lights-decor",
+    "category": "Wedding Decor",
+    "subcategory": "Wedding Decoration",
+    "location": "Bangalore",
+    "rating": 4.8,
+    "reviewCount": 117,
+    "startingPrice": 35000,
+    "verified": true,
+    "featured": true,
+    "description": "Beautiful floral styling, lighting and wedding decor tailored to your celebration.",
+    "coverImage": "https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/petalsandlightsdecor",
+    "whatsapp": "919876543209",
+    "contactLocked": true
+  },
+  {
+    "id": "vendor-010",
+    "name": "Dream Decor Events",
+    "slug": "dream-decor-events",
+    "category": "Wedding Decor",
+    "subcategory": "Event Decoration",
+    "location": "Hyderabad",
+    "rating": 4.7,
+    "reviewCount": 88,
+    "startingPrice": 30000,
+    "verified": true,
+    "featured": false,
+    "description": "Creative wedding decoration and event styling for memorable celebrations.",
+    "coverImage": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1000&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85"
+    ],
+    "instagram": "https://instagram.com/dreamdecorevents",
+    "whatsapp": "919876543210",
+    "contactLocked": true
+  }
+]
