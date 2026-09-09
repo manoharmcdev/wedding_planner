@@ -15,16 +15,11 @@ import { useEffect, useState } from "react";
 import { theme } from "@/config/theme";
 import Reveal from "@/components/common/Reveal";
 import ScrollToTop from "@/components/common/ScrollToTop";
-import {
-  clearStoredUser,
-  getStoredUser,
-} from "@/services/authService";
+import { clearStoredUser, getStoredUser } from "@/services/authService";
 import type { User } from "@/types/user";
 
 export default function DashboardContent() {
-  const [user, setUser] = useState<User | null>(
-    null,
-  );
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const currentUser = getStoredUser();
@@ -48,10 +43,8 @@ export default function DashboardContent() {
         <div
           className="h-10 w-10 animate-spin rounded-full border-4"
           style={{
-            borderColor:
-              theme.colors.primaryLight,
-            borderTopColor:
-              theme.colors.primary,
+            borderColor: theme.colors.primaryLight,
+            borderTopColor: theme.colors.primary,
           }}
         />
       </main>
@@ -65,8 +58,7 @@ export default function DashboardContent() {
       <main
         className="min-h-screen py-8 sm:py-12"
         style={{
-          backgroundColor:
-            theme.colors.background,
+          backgroundColor: theme.colors.background,
         }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -75,8 +67,7 @@ export default function DashboardContent() {
             <section
               className="relative overflow-hidden rounded-3xl p-6 shadow-xl sm:p-9"
               style={{
-                backgroundColor:
-                  theme.colors.primary,
+                backgroundColor: theme.colors.primary,
               }}
             >
               <div
@@ -103,8 +94,7 @@ export default function DashboardContent() {
                 </h1>
 
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-white/80">
-                  Manage your wedding planning,
-                  favourite vendors and enquiries
+                  Manage your wedding planning, favourite vendors and enquiries
                   from your personal dashboard.
                 </p>
               </div>
@@ -149,15 +139,13 @@ export default function DashboardContent() {
               <section
                 className="rounded-3xl border bg-white p-5 shadow-sm sm:p-7"
                 style={{
-                  borderColor:
-                    theme.colors.border,
+                  borderColor: theme.colors.border,
                 }}
               >
                 <p
                   className="text-xs font-semibold uppercase tracking-[0.15em]"
                   style={{
-                    color:
-                      theme.colors.primary,
+                    color: theme.colors.primary,
                   }}
                 >
                   Your activity
@@ -176,10 +164,8 @@ export default function DashboardContent() {
                   <div
                     className="mx-auto flex h-14 w-14 items-center justify-center rounded-full"
                     style={{
-                      backgroundColor:
-                        theme.colors.primaryLight,
-                      color:
-                        theme.colors.primary,
+                      backgroundColor: theme.colors.primaryLight,
+                      color: theme.colors.primary,
                     }}
                   >
                     <Heart size={23} />
@@ -197,12 +183,10 @@ export default function DashboardContent() {
                   <p
                     className="mx-auto mt-2 max-w-md text-sm leading-6"
                     style={{
-                      color:
-                        theme.colors.mutedText,
+                      color: theme.colors.mutedText,
                     }}
                   >
-                    Browse vendors and save the
-                    ones you love. Your activity
+                    Browse vendors and save the ones you love. Your activity
                     will appear here as you plan.
                   </p>
 
@@ -210,8 +194,7 @@ export default function DashboardContent() {
                     href="/vendors"
                     className="mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-lg"
                     style={{
-                      backgroundColor:
-                        theme.colors.primary,
+                      backgroundColor: theme.colors.primary,
                     }}
                   >
                     <Search size={16} />
@@ -226,8 +209,7 @@ export default function DashboardContent() {
               <section
                 className="rounded-3xl border bg-white p-5 shadow-sm sm:p-7"
                 style={{
-                  borderColor:
-                    theme.colors.border,
+                  borderColor: theme.colors.border,
                 }}
               >
                 <div className="flex items-center justify-between">
@@ -244,8 +226,7 @@ export default function DashboardContent() {
                     href="/profile"
                     className="text-xs font-semibold"
                     style={{
-                      color:
-                        theme.colors.primary,
+                      color: theme.colors.primary,
                     }}
                   >
                     Edit
@@ -256,8 +237,7 @@ export default function DashboardContent() {
                   <div
                     className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-white"
                     style={{
-                      backgroundColor:
-                        theme.colors.primary,
+                      backgroundColor: theme.colors.primary,
                     }}
                   >
                     <UserRound size={24} />
@@ -267,8 +247,7 @@ export default function DashboardContent() {
                     <h3
                       className="truncate font-semibold"
                       style={{
-                        color:
-                          theme.colors.text,
+                        color: theme.colors.text,
                       }}
                     >
                       {user.name}
@@ -277,8 +256,7 @@ export default function DashboardContent() {
                     <p
                       className="truncate text-xs"
                       style={{
-                        color:
-                          theme.colors.mutedText,
+                        color: theme.colors.mutedText,
                       }}
                     >
                       {user.email}
@@ -287,14 +265,11 @@ export default function DashboardContent() {
                 </div>
 
                 <div className="mt-6 space-y-4">
-                  <ProfileRow
-                    icon={<Mail size={16} />}
-                    value={user.email}
-                  />
+                  <ProfileRow icon={<Mail size={16} />} value={user.email} />
 
                   <ProfileRow
                     icon={<MessageSquare size={16} />}
-                    value={user.phone}
+                    value={user.phone ?? "Phone number not set"}
                   />
 
                   <ProfileRow
@@ -312,10 +287,8 @@ export default function DashboardContent() {
                   href="/profile"
                   className="mt-6 flex h-11 w-full items-center justify-center rounded-full border text-sm font-semibold transition-all hover:-translate-y-0.5 hover:shadow-md"
                   style={{
-                    borderColor:
-                      theme.colors.border,
-                    color:
-                      theme.colors.primary,
+                    borderColor: theme.colors.border,
+                    color: theme.colors.primary,
                   }}
                 >
                   Manage Profile
@@ -399,25 +372,19 @@ function StatCard({
   delay: number;
 }) {
   return (
-    <Reveal
-      direction="up"
-      delay={delay}
-    >
+    <Reveal direction="up" delay={delay}>
       <div
         className="rounded-2xl border bg-white p-4 shadow-sm sm:p-5"
         style={{
-          borderColor:
-            theme.colors.border,
+          borderColor: theme.colors.border,
         }}
       >
         <div className="flex items-center justify-between gap-2">
           <span
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
             style={{
-              backgroundColor:
-                theme.colors.primaryLight,
-              color:
-                theme.colors.primary,
+              backgroundColor: theme.colors.primaryLight,
+              color: theme.colors.primary,
             }}
           >
             {icon}
@@ -436,8 +403,7 @@ function StatCard({
         <p
           className="mt-4 text-[11px] font-medium sm:text-xs"
           style={{
-            color:
-              theme.colors.mutedText,
+            color: theme.colors.mutedText,
           }}
         >
           {label}
@@ -447,22 +413,14 @@ function StatCard({
   );
 }
 
-function ProfileRow({
-  icon,
-  value,
-}: {
-  icon: React.ReactNode;
-  value: string;
-}) {
+function ProfileRow({ icon, value }: { icon: React.ReactNode; value: string }) {
   return (
     <div className="flex min-w-0 items-center gap-3">
       <span
         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
         style={{
-          backgroundColor:
-            theme.colors.background,
-          color:
-            theme.colors.primary,
+          backgroundColor: theme.colors.background,
+          color: theme.colors.primary,
         }}
       >
         {icon}
@@ -471,8 +429,7 @@ function ProfileRow({
       <span
         className="truncate text-sm"
         style={{
-          color:
-            theme.colors.mutedText,
+          color: theme.colors.mutedText,
         }}
       >
         {value}
@@ -497,17 +454,14 @@ function QuickAction({
       href={href}
       className="rounded-2xl border bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
       style={{
-        borderColor:
-          theme.colors.border,
+        borderColor: theme.colors.border,
       }}
     >
       <span
         className="flex h-10 w-10 items-center justify-center rounded-xl"
         style={{
-          backgroundColor:
-            theme.colors.primaryLight,
-          color:
-            theme.colors.primary,
+          backgroundColor: theme.colors.primaryLight,
+          color: theme.colors.primary,
         }}
       >
         {icon}
@@ -525,8 +479,7 @@ function QuickAction({
       <p
         className="mt-1 text-xs leading-5"
         style={{
-          color:
-            theme.colors.mutedText,
+          color: theme.colors.mutedText,
         }}
       >
         {description}
