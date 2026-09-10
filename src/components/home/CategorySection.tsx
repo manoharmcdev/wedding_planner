@@ -1,146 +1,238 @@
-import Link from "next/link";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+"use client";
 
-import { getCategories } from "@/services/categoryService";
+import Image from "next/image";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import Reveal from "@/components/common/Reveal";
 import LoadingLink from "@/components/common/LoadingLink";
+import { theme } from "@/config/theme";
+import { getCategories } from "@/services/categoryService";
+import type { Category } from "@/types/category";
 
-export default async function CategorySection() {
-  const categories = await getCategories();
+export default function CategorySection() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to load categories:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadCategories();
+  }, []);
+
+  const visibleCategories = categories.slice(0, 6);
 
   return (
-    <section className="relative overflow-hidden bg-background py-20 sm:py-24 lg:py-32">
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute -left-52 top-20 h-[420px] w-[420px] rounded-full bg-primary-light/50 blur-3xl" />
+    <section
+      id="categories"
+      className="w-full overflow-hidden py-12 sm:py-16 lg:py-20"
+      style={{
+        backgroundColor: theme.colors.background,
+      }}
+    >
+      <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">
 
-      <div className="pointer-events-none absolute -right-52 bottom-10 h-[480px] w-[480px] rounded-full bg-secondary/30 blur-3xl" />
+        {/* ================================
+            HEADER
+        ================================= */}
 
-      <div className="relative mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
-        {/* Section introduction */}
-        <div className="grid items-end gap-8 lg:grid-cols-[1fr_auto]">
-          <Reveal direction="left" distance={70}>
-            <div className="max-w-3xl">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary-light px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                <Sparkles className="h-3.5 w-3.5" />
-                Explore services
-              </div>
-
-              <h2 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                Everything for your
-                <span className="mt-1 block text-primary">
-                  perfect celebration
-                </span>
-              </h2>
-
-              <p className="mt-6 max-w-2xl text-sm leading-7 text-muted sm:text-base sm:leading-8">
-                From finding your dream venue to choosing the perfect
-                photographer, discover trusted wedding professionals in one
-                beautiful place.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal direction="right" distance={50}>
-            <Link
-              href="/categories"
-              className="group hidden items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:text-primary hover:shadow-md lg:inline-flex"
+        <Reveal direction="up">
+          <div className="mx-auto max-w-2xl text-center">
+            <div
+              className="inline-flex items-center gap-2 rounded-full border bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em]"
+              style={{
+                borderColor: theme.colors.border,
+                color: theme.colors.primary,
+              }}
             >
-              View all categories
+              <Sparkles size={14} />
+              Explore Services
+            </div>
 
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </Reveal>
-        </div>
+            <h2
+              className="mt-5 font-display text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl"
+              style={{
+                color: theme.colors.text,
+              }}
+            >
+              Everything for your
+              <span
+                className="block"
+                style={{
+                  color: theme.colors.primary,
+                }}
+              >
+                perfect celebration
+              </span>
+            </h2>
 
-        {/* Category cards */}
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-5 lg:mt-16 lg:grid-cols-6">
-          {categories.map((category, index) => {
-            const direction =
-              index % 4 === 0
-                ? "left"
-                : index % 4 === 1
-                  ? "right"
-                  : index % 4 === 2
-                    ? "up"
-                    : "down";
+            <p
+              className="mx-auto mt-4 max-w-xl text-sm leading-6 sm:text-base"
+              style={{
+                color: theme.colors.mutedText,
+              }}
+            >
+              Discover trusted wedding professionals for every
+              important moment of your celebration.
+            </p>
+          </div>
+        </Reveal>
 
-            return (
+        {/* ================================
+            LOADING
+        ================================= */}
+
+        {loading && (
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="h-[220px] w-full animate-pulse rounded-2xl bg-stone-200 sm:h-[280px] lg:h-[330px]"
+              />
+            ))}
+          </div>
+        )}
+
+        {/* ================================
+            CATEGORIES
+        ================================= */}
+
+        {!loading && visibleCategories.length > 0 && (
+          <div className="mt-8 grid w-full grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:mt-12 lg:grid-cols-6 lg:gap-4">
+
+            {visibleCategories.map((category, index) => (
               <Reveal
                 key={category.id}
-                direction={direction}
-                distance={45}
-                delay={index * 90}
-                className="h-full"
+                direction={
+                  index % 4 === 0
+                    ? "left"
+                    : index % 4 === 1
+                      ? "up"
+                      : index % 4 === 2
+                        ? "right"
+                        : "down"
+                }
+                delay={index * 80}
+                className="w-full min-w-0"
               >
                 <LoadingLink
                   href={`/vendors?category=${encodeURIComponent(
-                    category.slug,
+                    category.id,
                   )}`}
-                  className="group block h-full"
+                  className="group block w-full overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
+                  style={{
+                    borderColor: theme.colors.border,
+                  }}
                 >
-                  <article className="relative h-full overflow-hidden rounded-[22px] border border-border bg-card shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
-                    {/* Fixed card size */}
-                    <div className="relative aspect-[4/5] w-full overflow-hidden">
-                      <img
+                  {/* IMAGE */}
+
+                  <div className="relative h-[260px] w-full overflow-hidden bg-stone-100 sm:h-[300px] lg:h-[330px]">
+
+                    {category.image ? (
+                      <Image
                         src={category.image}
                         alt={category.name}
-                        loading={index < 3 ? "eager" : "lazy"}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        fill
+                        priority={index < 2}
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 16vw"
+                        className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                       />
-
-                      {/* Gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-
-                      {/* Subtle hover glow */}
-                      <div className="absolute inset-0 bg-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                      {/* Number */}
-                      <div className="absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-white/30 bg-black/20 text-[10px] font-semibold text-white backdrop-blur-md">
-                        {String(index + 1).padStart(2, "0")}
+                    ) : (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center"
+                        style={{
+                          backgroundColor:
+                            theme.colors.primaryLight,
+                          color: theme.colors.primary,
+                        }}
+                      >
+                        <Sparkles size={32} />
                       </div>
+                    )}
 
-                      {/* Arrow */}
-                      <div className="absolute right-3 top-3 flex h-9 w-9 translate-y-2 items-center justify-center rounded-full border border-white/20 bg-white/15 text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                        <ArrowUpRight className="h-4 w-4" />
-                      </div>
+                    {/* OVERLAY */}
 
-                      {/* Content */}
-                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                        <p className="mb-1 text-[9px] font-medium uppercase tracking-[0.18em] text-white/60">
-                          Wedding service
-                        </p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                        <h3 className="font-display text-lg font-semibold leading-tight text-white sm:text-xl">
-                          {category.name}
-                        </h3>
+                    {/* NUMBER */}
 
-                        <div className="mt-3 h-px w-0 bg-white/50 transition-all duration-500 group-hover:w-full" />
+                    <div className="absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-xs font-semibold shadow-md">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
 
-                        <p className="mt-2 translate-y-2 text-[11px] text-white/0 transition-all duration-500 group-hover:translate-y-0 group-hover:text-white/70">
-                          Discover professionals
-                        </p>
+                    {/* CONTENT */}
+
+                    <div className="absolute inset-x-0 bottom-0 p-4">
+                      <h3 className="font-display text-xl font-semibold leading-tight text-white lg:text-lg xl:text-xl">
+                        {category.name}
+                      </h3>
+
+                      <p className="mt-2 hidden line-clamp-2 text-xs leading-5 text-white/80 lg:block">
+                        {category.description}
+                      </p>
+
+                      <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-white">
+                        Explore
+                        <ArrowRight
+                          size={14}
+                          className="transition-transform duration-300 group-hover:translate-x-1"
+                        />
                       </div>
                     </div>
-                  </article>
+                  </div>
                 </LoadingLink>
               </Reveal>
-            );
-          })}
-        </div>
-
-        {/* Mobile / tablet CTA */}
-        <Reveal direction="up" delay={300}>
-          <div className="mt-9 flex justify-center lg:hidden">
-            <Link
-              href="/categories"
-              className="group inline-flex items-center gap-2 rounded-full border border-primary/25 bg-card px-6 py-3 text-sm font-semibold text-primary shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-primary hover:text-white hover:shadow-lg"
-            >
-              View all categories
-
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
+            ))}
           </div>
-        </Reveal>
+        )}
+
+        {/* ================================
+            EMPTY STATE
+        ================================= */}
+
+        {!loading && visibleCategories.length === 0 && (
+          <div className="mt-10 rounded-2xl border bg-white p-8 text-center">
+            <p
+              className="text-sm"
+              style={{
+                color: theme.colors.mutedText,
+              }}
+            >
+              No categories available right now.
+            </p>
+          </div>
+        )}
+
+        {/* ================================
+            VIEW ALL
+        ================================= */}
+
+        {!loading && visibleCategories.length > 0 && (
+          <Reveal direction="up" delay={300}>
+            <div className="mt-8 text-center sm:mt-10">
+              <LoadingLink
+                href="/categories"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border bg-white px-6 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                style={{
+                  borderColor: theme.colors.border,
+                  color: theme.colors.primary,
+                }}
+              >
+                View All Categories
+                <ArrowRight size={16} />
+              </LoadingLink>
+            </div>
+          </Reveal>
+        )}
       </div>
     </section>
   );
