@@ -1,11 +1,7 @@
 "use client";
 
-import {
-  ArrowRight,
-  MapPin,
-  Search,
-} from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Check, MapPin, Search, SlidersHorizontal } from "lucide-react";
+import { useMemo, useState } from "react";
 
 import Reveal from "@/components/common/Reveal";
 import LoadingLink from "@/components/common/LoadingLink";
@@ -33,272 +29,402 @@ export default function FindVendors({
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
 
-  const searchHref =
-    `/vendors?location=${encodeURIComponent(location)}` +
-    `&category=${encodeURIComponent(category)}`;
+  const [locationSearch, setLocationSearch] = useState("");
+  const [categorySearch, setCategorySearch] = useState("");
+
+  const filteredLocations = useMemo(() => {
+    const search = locationSearch.trim().toLowerCase();
+
+    if (!search) {
+      return locations;
+    }
+
+    return locations.filter((item) =>
+      item.name.toLowerCase().includes(search),
+    );
+  }, [locations, locationSearch]);
+
+  const filteredCategories = useMemo(() => {
+    const search = categorySearch.trim().toLowerCase();
+
+    if (!search) {
+      return categories;
+    }
+
+    return categories.filter((item) =>
+      item.name.toLowerCase().includes(search),
+    );
+  }, [categories, categorySearch]);
+
+  const selectedLocationName =
+    locations.find((item) => item.id === location)?.name ?? "";
+
+  const selectedCategoryName =
+    categories.find((item) => item.id === category)?.name ?? "";
+
+  const searchParams = new URLSearchParams();
+
+  if (location) {
+    searchParams.set("location", location);
+  }
+
+  if (category) {
+    searchParams.set("category", category);
+  }
+
+  const searchHref = `/vendors${
+    searchParams.toString() ? `?${searchParams.toString()}` : ""
+  }`;
 
   return (
     <section
-      className="w-full overflow-hidden py-14 sm:py-16 lg:py-20"
+      id="find-vendors"
+      className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
       style={{
-        backgroundColor: theme.colors.primaryLight,
+        background:
+          "linear-gradient(180deg, #fffaf7 0%, #fff5f6 50%, #fffaf7 100%)",
       }}
     >
-      <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">
+      {/* Decorative background */}
+      <div
+        className="pointer-events-none absolute -left-24 top-20 h-64 w-64 rounded-full blur-3xl opacity-40"
+        style={{ background: theme.colors.primaryLight }}
+      />
 
-        {/* Heading */}
+      <div
+        className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full blur-3xl opacity-30"
+        style={{ background: theme.colors.secondary }}
+      />
+
+      <div className="relative mx-auto w-full max-w-[1100px] px-4 sm:px-6 lg:px-8">
         <Reveal direction="up">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="mx-auto max-w-3xl text-center">
             <div
-              className="inline-flex items-center gap-2 rounded-full border bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em]"
+              className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em]"
               style={{
                 borderColor: theme.colors.border,
+                background: "#ffffff",
                 color: theme.colors.primary,
               }}
             >
-              <Search size={14} />
-              Find Vendors
+              <SlidersHorizontal size={14} />
+              Find your perfect vendor
             </div>
 
             <h2
-              className="mt-5 font-display text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl"
-              style={{
-                color: theme.colors.text,
-              }}
+              className="font-display text-3xl font-semibold sm:text-4xl lg:text-5xl"
+              style={{ color: theme.colors.text }}
             >
-              Find the perfect vendors
-              <span
-                className="block"
-                style={{
-                  color: theme.colors.primary,
-                }}
-              >
-                for your wedding
-              </span>
+              Find Wedding Vendors
             </h2>
 
             <p
-              className="mt-4 text-sm leading-6 sm:text-base"
-              style={{
-                color: theme.colors.mutedText,
-              }}
+              className="mx-auto mt-4 max-w-2xl text-sm leading-7 sm:text-base"
+              style={{ color: theme.colors.mutedText }}
             >
-              Choose your location and service to discover
-              trusted wedding professionals.
+              Search trusted wedding professionals by location and category.
+              Find the right match for your special day.
             </p>
           </div>
         </Reveal>
 
-        {/* Search Box */}
         <Reveal direction="up" delay={120}>
           <div
-            className="mx-auto mt-8 w-full max-w-5xl rounded-[24px] border bg-white p-3 shadow-xl sm:mt-10 sm:rounded-[28px] sm:p-4"
-            style={{
-              borderColor: theme.colors.border,
-            }}
+            className="mx-auto mt-10 rounded-[24px] border bg-white p-4 shadow-[0_20px_60px_rgba(89,48,57,0.10)] sm:p-6 lg:p-7"
+            style={{ borderColor: theme.colors.border }}
           >
-            <div className="grid w-full grid-cols-1 gap-3 lg:grid-cols-[1fr_1fr_auto]">
+            <div className="grid gap-4 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
+              {/* Location */}
+              <div className="min-w-0">
+                <label
+                  className="mb-2 block text-sm font-semibold"
+                  style={{ color: theme.colors.text }}
+                >
+                  Location
+                </label>
 
-              {/* LOCATION */}
-              <div
-                className="flex min-h-[64px] min-w-0 items-center rounded-[18px] border px-4 sm:px-5"
-                style={{
-                  borderColor: theme.colors.border,
-                  backgroundColor: theme.colors.background,
-                }}
-              >
-                <div
-                  className="mr-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
-                  style={{
-                    backgroundColor: theme.colors.primaryLight,
-                    color: theme.colors.primary,
+                <Select
+                  value={location}
+                  onValueChange={(value) => {
+                    setLocation(value ?? "");
+                    setLocationSearch("");
                   }}
                 >
-                  <MapPin size={18} />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <p
-                    className="mb-1 text-[10px] font-bold uppercase tracking-[0.12em]"
+                  <SelectTrigger
+                    className="h-14 w-full rounded-2xl border px-4 shadow-none transition-all hover:shadow-sm focus:ring-2"
                     style={{
-                      color: theme.colors.mutedText,
+                      borderColor: theme.colors.border,
+                      background: "#fffdfc",
+                      color: location
+                        ? theme.colors.text
+                        : theme.colors.mutedText,
                     }}
                   >
-                    Location
-                  </p>
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                        style={{
+                          background: theme.colors.primaryLight,
+                          color: theme.colors.primary,
+                        }}
+                      >
+                        <MapPin size={17} />
+                      </span>
 
-                  <Select
-                    value={location}
-                     onValueChange={(value) => setLocation(value ?? "")}
+                      <SelectValue placeholder="Choose a location">
+                        <span className="truncate">
+                          {selectedLocationName}
+                        </span>
+                      </SelectValue>
+                    </div>
+                  </SelectTrigger>
+
+                  <SelectContent
+                    className="z-[100] w-[var(--radix-select-trigger-width)] min-w-[280px] overflow-hidden rounded-2xl border bg-white p-2 shadow-[0_20px_50px_rgba(0,0,0,0.14)]"
+                    style={{ borderColor: theme.colors.border }}
                   >
-                    <SelectTrigger
-                      className="h-auto w-full border-0 bg-transparent p-0 text-sm font-semibold shadow-none outline-none focus:ring-0 focus:ring-offset-0"
-                      style={{
-                        color: location
-                          ? theme.colors.text
-                          : theme.colors.mutedText,
-                      }}
+                    {/* Search */}
+                    <div
+                      className="sticky top-0 z-10 mb-2 rounded-xl border bg-white p-2"
+                      style={{ borderColor: theme.colors.border }}
+                      onKeyDown={(event) => event.stopPropagation()}
                     >
-                      <SelectValue placeholder="Select location" />
-                    </SelectTrigger>
+                      <div className="flex items-center gap-2 px-2">
+                        <Search
+                          size={16}
+                          style={{ color: theme.colors.mutedText }}
+                        />
 
-                    <SelectContent
-                      className="z-[9999] rounded-xl border bg-white shadow-xl"
-                      style={{
-                        borderColor: theme.colors.border,
-                      }}
-                    >
-                      {locations.map((item) => (
-                        <SelectItem
-                          key={item.id}
-                          value={item.name}
-                          className="cursor-pointer rounded-lg py-2.5"
-                        >
-                          {item.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                        <input
+                          value={locationSearch}
+                          onChange={(event) =>
+                            setLocationSearch(event.target.value)
+                          }
+                          placeholder="Search location..."
+                          className="h-9 w-full bg-transparent text-sm outline-none placeholder:text-stone-400"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Scrollable options */}
+                    <div className="max-h-64 overflow-y-auto pr-1">
+                      {filteredLocations.length > 0 ? (
+                        filteredLocations.map((item) => (
+                          <SelectItem
+                            key={item.id}
+                            value={item.id}
+                            className="my-1 cursor-pointer rounded-xl py-3 pl-3 pr-9 text-sm"
+                          >
+                            <span className="flex items-center gap-2">
+                              <MapPin
+                                size={15}
+                                style={{ color: theme.colors.primary }}
+                              />
+                              {item.name}
+
+                              {location === item.id && (
+                                <Check
+                                  size={15}
+                                  className="ml-auto"
+                                  style={{ color: theme.colors.primary }}
+                                />
+                              )}
+                            </span>
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <div className="px-3 py-8 text-center text-sm text-stone-500">
+                          No locations found
+                        </div>
+                      )}
+                    </div>
+                  </SelectContent>
+                </Select>
               </div>
 
-              {/* CATEGORY */}
-              <div
-                className="flex min-h-[64px] min-w-0 items-center rounded-[18px] border px-4 sm:px-5"
-                style={{
-                  borderColor: theme.colors.border,
-                  backgroundColor: theme.colors.background,
-                }}
-              >
-                <div
-                  className="mr-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+              {/* Category */}
+              <div className="min-w-0">
+                <label
+                  className="mb-2 block text-sm font-semibold"
+                  style={{ color: theme.colors.text }}
+                >
+                  Category
+                </label>
+
+                <Select
+                  value={category}
+                  onValueChange={(value) => {
+                    setCategory(value ?? "");
+                    setCategorySearch("");
+                  }}
+                >
+                  <SelectTrigger
+                    className="h-14 w-full rounded-2xl border px-4 shadow-none transition-all hover:shadow-sm focus:ring-2"
+                    style={{
+                      borderColor: theme.colors.border,
+                      background: "#fffdfc",
+                      color: category
+                        ? theme.colors.text
+                        : theme.colors.mutedText,
+                    }}
+                  >
+                    <div className="flex min-w-0 items-center gap-3">
+                      <span
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                        style={{
+                          background: theme.colors.primaryLight,
+                          color: theme.colors.primary,
+                        }}
+                      >
+                        <SlidersHorizontal size={17} />
+                      </span>
+
+                      <SelectValue placeholder="Choose a category">
+                        <span className="truncate">
+                          {selectedCategoryName}
+                        </span>
+                      </SelectValue>
+                    </div>
+                  </SelectTrigger>
+
+                  <SelectContent
+                    className="z-[100] w-[var(--radix-select-trigger-width)] min-w-[280px] overflow-hidden rounded-2xl border bg-white p-2 shadow-[0_20px_50px_rgba(0,0,0,0.14)]"
+                    style={{ borderColor: theme.colors.border }}
+                  >
+                    {/* Search */}
+                    <div
+                      className="sticky top-0 z-10 mb-2 rounded-xl border bg-white p-2"
+                      style={{ borderColor: theme.colors.border }}
+                      onKeyDown={(event) => event.stopPropagation()}
+                    >
+                      <div className="flex items-center gap-2 px-2">
+                        <Search
+                          size={16}
+                          style={{ color: theme.colors.mutedText }}
+                        />
+
+                        <input
+                          value={categorySearch}
+                          onChange={(event) =>
+                            setCategorySearch(event.target.value)
+                          }
+                          placeholder="Search category..."
+                          className="h-9 w-full bg-transparent text-sm outline-none placeholder:text-stone-400"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Scrollable options */}
+                    <div className="max-h-64 overflow-y-auto pr-1">
+                      {filteredCategories.length > 0 ? (
+                        filteredCategories.map((item) => (
+                          <SelectItem
+                            key={item.id}
+                            value={item.id}
+                            className="my-1 cursor-pointer rounded-xl py-3 pl-3 pr-9 text-sm"
+                          >
+                            <span className="flex items-center gap-2">
+                              <span
+                                className="h-2 w-2 shrink-0 rounded-full"
+                                style={{
+                                  background: theme.colors.primary,
+                                }}
+                              />
+
+                              {item.name}
+
+                              {category === item.id && (
+                                <Check
+                                  size={15}
+                                  className="ml-auto"
+                                  style={{ color: theme.colors.primary }}
+                                />
+                              )}
+                            </span>
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <div className="px-3 py-8 text-center text-sm text-stone-500">
+                          No categories found
+                        </div>
+                      )}
+                    </div>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Search button */}
+              <div className="lg:pb-0">
+                <LoadingLink
+                  href={searchHref}
+                  className="h-14 w-full rounded-2xl px-6 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl lg:w-auto lg:min-w-[170px]"
                   style={{
-                    backgroundColor: theme.colors.primaryLight,
-                    color: theme.colors.primary,
+                    background: theme.colors.primary,
                   }}
                 >
                   <Search size={18} />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <p
-                    className="mb-1 text-[10px] font-bold uppercase tracking-[0.12em]"
-                    style={{
-                      color: theme.colors.mutedText,
-                    }}
-                  >
-                    What are you looking for?
-                  </p>
-
-                  <Select
-                    value={category}
-                     onValueChange={(value) => setCategory(value ?? "")}
-                  >
-                    <SelectTrigger
-                      className="h-auto w-full border-0 bg-transparent p-0 text-sm font-semibold shadow-none outline-none focus:ring-0 focus:ring-offset-0"
-                      style={{
-                        color: category
-                          ? theme.colors.text
-                          : theme.colors.mutedText,
-                      }}
-                    >
-                      <SelectValue placeholder="Select service" />
-                    </SelectTrigger>
-
-                    <SelectContent
-                      className="z-[9999] rounded-xl border bg-white shadow-xl"
-                      style={{
-                        borderColor: theme.colors.border,
-                      }}
-                    >
-                      {categories.map((item) => (
-                        <SelectItem
-                          key={item.id}
-                          value={item.id}
-                          className="cursor-pointer rounded-lg py-2.5"
-                        >
-                          {item.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <span className="ml-2">Find Vendors</span>
+                </LoadingLink>
               </div>
-
-              {/* SEARCH BUTTON */}
-              <LoadingLink
-                href={searchHref}
-                className="min-h-[64px] w-full rounded-[18px] px-7 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl lg:min-w-[175px] lg:w-auto"
-                style={{
-                  backgroundColor: theme.colors.primary,
-                }}
-              >
-                <Search size={18} />
-                <span className="ml-2">
-                  Find Vendors
-                </span>
-              </LoadingLink>
             </div>
 
-            {/* Selected values */}
+            {/* Selected filters */}
             {(location || category) && (
-              <div className="mt-3 flex flex-wrap gap-2 px-1">
+              <div
+                className="mt-5 flex flex-wrap items-center gap-2 border-t pt-4"
+                style={{ borderColor: theme.colors.border }}
+              >
+                <span
+                  className="mr-1 text-xs font-medium"
+                  style={{ color: theme.colors.mutedText }}
+                >
+                  Selected:
+                </span>
+
                 {location && (
-                  <span
-                    className="inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1.5 text-xs font-medium"
+                  <button
+                    type="button"
+                    onClick={() => setLocation("")}
+                    className="rounded-full px-3 py-1.5 text-xs font-medium transition hover:opacity-80"
                     style={{
-                      borderColor: theme.colors.border,
-                      color: theme.colors.text,
+                      background: theme.colors.primaryLight,
+                      color: theme.colors.primary,
                     }}
                   >
-                    <MapPin
-                      size={13}
-                      style={{
-                        color: theme.colors.primary,
-                      }}
-                    />
-                    {location}
-                  </span>
+                    {selectedLocationName} ×
+                  </button>
                 )}
 
                 {category && (
-                  <span
-                    className="inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1.5 text-xs font-medium"
+                  <button
+                    type="button"
+                    onClick={() => setCategory("")}
+                    className="rounded-full px-3 py-1.5 text-xs font-medium transition hover:opacity-80"
                     style={{
-                      borderColor: theme.colors.border,
-                      color: theme.colors.text,
+                      background: theme.colors.primaryLight,
+                      color: theme.colors.primary,
                     }}
                   >
-                    <Search
-                      size={13}
-                      style={{
-                        color: theme.colors.primary,
-                      }}
-                    />
-
-                    {categories.find(
-                      (item) => item.id === category,
-                    )?.name ?? category}
-                  </span>
+                    {selectedCategoryName} ×
+                  </button>
                 )}
               </div>
             )}
-          </div>
-        </Reveal>
 
-        {/* Browse all */}
-        <Reveal direction="up" delay={220}>
-          <div className="mt-6 text-center">
-            <LoadingLink
-              href="/vendors"
-              className="inline-flex items-center gap-2 text-sm font-semibold"
-              style={{
-                color: theme.colors.primary,
-              }}
-            >
-              Browse all vendors
-              <ArrowRight size={16} />
-            </LoadingLink>
+            {/* Browse all */}
+            <div className="mt-5 flex justify-center">
+              <LoadingLink
+                href="/vendors"
+                className="group inline-flex items-center gap-2 text-sm font-semibold"
+                style={{ color: theme.colors.primary }}
+              >
+                Browse all vendors
+                <ArrowRight
+                  size={16}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </LoadingLink>
+            </div>
           </div>
         </Reveal>
       </div>

@@ -13,9 +13,10 @@ import {
 import { useMemo, useState } from "react";
 
 import Reveal from "@/components/common/Reveal";
+import VendorCardLink from "@/components/home/VendorCardLink";
 import { theme } from "@/config/theme";
 import type { Vendor } from "@/types/vendor";
-import VendorCardLink from "../home/VendorCardLink";
+import FavoriteButton from "./FavoriteButton";
 
 interface CategoryOption {
   id: string;
@@ -125,13 +126,6 @@ export default function VendorsListing({
 
       /*
        * Location
-       *
-       * Case-insensitive so:
-       * Bangalore
-       * bangalore
-       * BANGALORE
-       *
-       * all work.
        */
       const matchesLocation =
         location === "all" ||
@@ -219,7 +213,7 @@ export default function VendorsListing({
   };
 
   return (
-    <div>
+    <div className="min-w-0 overflow-x-hidden">
       {/* ================================================== */}
       {/* SEARCH HEADER */}
       {/* ================================================== */}
@@ -231,7 +225,7 @@ export default function VendorsListing({
           borderColor: theme.colors.border,
         }}
       >
-        <div className="mx-auto max-w-[1280px] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
+        <div className="mx-auto w-full max-w-[1280px] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
           <Reveal direction="up" distance={40}>
             <div className="max-w-3xl">
               <p
@@ -481,7 +475,7 @@ export default function VendorsListing({
       {/* RESULTS */}
       {/* ================================================== */}
 
-      <section className="mx-auto max-w-[1280px] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-16">
+      <section className="mx-auto w-full max-w-[1280px] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-16">
         <Reveal direction="up" distance={40}>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -551,7 +545,7 @@ export default function VendorsListing({
                     borderColor: theme.colors.border,
                   }}
                 >
-                  {/* IMAGE */}
+                  {/* IMAGE + FAVORITE */}
                   <VendorImage vendor={vendor} />
 
                   {/* CONTENT */}
@@ -742,6 +736,14 @@ function VendorImage({
           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-70" />
         </a>
 
+        {/* FAVORITE BUTTON */}
+        <FavoriteButton
+          vendorId={vendor.id}
+          vendorName={vendor.name}
+          className="absolute right-4 top-4 z-20"
+        />
+
+        {/* VERIFIED */}
         {vendor.verified && (
           <div
             className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md"

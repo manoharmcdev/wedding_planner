@@ -1,225 +1,384 @@
 "use client";
 
-import Link from "next/link";
-import { Search, MapPin, ChevronDown, Sparkles } from "lucide-react";
-import { useState } from "react";
+import {
+  ArrowRight,
+  CalendarDays,
+  Check,
+  ChevronDown,
+  MapPin,
+  Search,
+  Sparkles,
+} from "lucide-react";
+import { useMemo, useState } from "react";
 
+import LoadingLink from "@/components/common/LoadingLink";
 import { theme } from "@/config/theme";
-import Reveal from "@/components/common/Reveal";
 
-const locations = [
-  "Bangalore",
-  "Hyderabad",
-  "Chennai",
-  "Mumbai",
-  "Delhi",
-  "Pune",
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+
+interface LocationOption {
+  id: string;
+  name: string;
+}
+
+interface CategoryOption {
+  id: string;
+  name: string;
+}
+
+const locations: LocationOption[] = [
+  { id: "bangalore", name: "Bangalore" },
+  { id: "hyderabad", name: "Hyderabad" },
+  { id: "chennai", name: "Chennai" },
+  { id: "mumbai", name: "Mumbai" },
+  { id: "delhi", name: "Delhi" },
+  { id: "pune", name: "Pune" },
+  { id: "mysore", name: "Mysore" },
 ];
 
-const categories = [
-  "Wedding Venues",
-  "Photographers",
-  "Makeup Artists",
-  "Wedding Decor",
-  "Mehndi Artists",
-  "Wedding Caterers",
+const categories: CategoryOption[] = [
+  { id: "photographers", name: "Photographers" },
+  { id: "videographers", name: "Videographers" },
+  { id: "makeup-artists", name: "Makeup Artists" },
+  { id: "wedding-venues", name: "Wedding Venues" },
+  { id: "decorators", name: "Decorators" },
+  { id: "mehendi-artists", name: "Mehendi Artists" },
+  { id: "bridal-wear", name: "Bridal Wear" },
+  { id: "groom-wear", name: "Groom Wear" },
 ];
 
 export default function Hero() {
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
 
-  const searchHref = `/vendors${
-    location || category
-      ? `?${new URLSearchParams({
-          ...(location ? { location } : {}),
-          ...(category ? { category } : {}),
-        }).toString()}`
-      : ""
-  }`;
+  const selectedLocation = useMemo(
+    () => locations.find((item) => item.id === location),
+    [location],
+  );
+
+  const selectedCategory = useMemo(
+    () => categories.find((item) => item.id === category),
+    [category],
+  );
+
+  const searchHref = useMemo(() => {
+    const params = new URLSearchParams();
+
+    if (location) {
+      params.set("location", location);
+    }
+
+    if (category) {
+      params.set("category", category);
+    }
+
+    const query = params.toString();
+
+    return query ? `/vendors?${query}` : "/vendors";
+  }, [location, category]);
 
   return (
-    <section className="relative overflow-hidden bg-background">
-      {/* Hero Image */}
-      <div className="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=85"
-          alt="Elegant wedding celebration"
-          className="h-full w-full object-cover"
-        />
+    <section
+      className="relative flex min-h-[calc(100svh-80px)] items-center overflow-hidden"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=85')",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-black/45" />
 
-        <div className="absolute inset-0 bg-black/40" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(41,37,36,0.88) 0%, rgba(41,37,36,0.68) 42%, rgba(41,37,36,0.28) 100%)",
+        }}
+      />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/35 to-black/20" />
+      {/* Decorative glow */}
+      <div
+        className="pointer-events-none absolute left-[-120px] top-[15%] h-[350px] w-[350px] rounded-full opacity-30 blur-3xl"
+        style={{
+          backgroundColor: theme.colors.primary,
+        }}
+      />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
-      </div>
+      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-5 py-20 sm:px-8 lg:px-10">
+        <div className="max-w-[760px]">
+          {/* Badge */}
+          <div
+            className="mb-7 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium backdrop-blur-md"
+            style={{
+              borderColor: "rgba(255,255,255,0.28)",
+              backgroundColor: "rgba(255,255,255,0.10)",
+              color: "#fff",
+            }}
+          >
+            <Sparkles
+              size={15}
+              style={{
+                color: theme.colors.secondary,
+              }}
+            />
 
-      {/* Decorative shapes */}
-      <div className="pointer-events-none absolute -left-32 top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+            <span>India&apos;s premium wedding marketplace</span>
+          </div>
 
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
+          {/* Heading */}
+          <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            Everything you need
+            <br />
+            for your{" "}
+            <span
+              style={{
+                color: theme.colors.secondary,
+              }}
+            >
+              perfect wedding
+            </span>
+          </h1>
 
-      {/* Content */}
-      <div className="relative mx-auto flex min-h-[calc(100vh-80px)] max-w-[1280px] items-center px-5 py-20 sm:px-8 lg:px-10">
-        <div className="w-full max-w-4xl">
-          <Reveal direction="up" delay={100}>
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white backdrop-blur-md">
-              <Sparkles className="h-3.5 w-3.5" />
-              Your wedding. Your story.
-            </div>
-          </Reveal>
+          {/* Description */}
+          <p className="mt-6 max-w-[650px] text-base leading-7 text-white/80 sm:text-lg">
+            Discover trusted wedding vendors, compare services and find the
+            perfect professionals to make your special day unforgettable.
+          </p>
 
-          <Reveal direction="up" delay={200}>
-            <h1 className="font-display max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-8xl">
-              Find the perfect
-              <span className="block text-[#F4D8C8]">
-                wedding vendors
-              </span>
-            </h1>
-          </Reveal>
-
-          <Reveal direction="up" delay={300}>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-white/85 sm:text-lg sm:leading-8">
-              Discover beautiful venues, talented photographers, makeup
-              artists, decorators and everything else you need to make your
-              celebration unforgettable.
-            </p>
-          </Reveal>
-
-          {/* Search */}
-          <Reveal direction="up" delay={400} className="mt-9">
-            <div className="rounded-[24px] border border-white/20 bg-white/95 p-2 shadow-2xl backdrop-blur-xl sm:p-3">
-              <div className="grid gap-2 md:grid-cols-[1fr_1fr_auto]">
-                {/* Location */}
-                <div className="relative">
-                  <label
-                    htmlFor="hero-location"
-                    className="sr-only"
-                  >
-                    Select location
-                  </label>
-
-                  <div className="flex h-14 items-center rounded-2xl bg-background px-4">
-                    <MapPin className="mr-3 h-5 w-5 shrink-0 text-primary" />
-
-                    <div className="min-w-0 flex-1">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-                        Location
-                      </p>
-
-                      <select
-                        id="hero-location"
-                        value={location}
-                        onChange={(event) =>
-                          setLocation(event.target.value)
-                        }
-                        className="mt-0.5 w-full appearance-none bg-transparent text-sm font-medium text-foreground outline-none"
-                      >
-                        <option value="">Choose location</option>
-
-                        {locations.map((item) => (
-                          <option key={item} value={item}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <ChevronDown className="h-4 w-4 shrink-0 text-muted" />
-                  </div>
+          {/* Search box */}
+          <div
+            className="mt-9 w-full rounded-[24px] p-3 shadow-2xl backdrop-blur-xl sm:p-4"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.96)",
+            }}
+          >
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-[1fr_1fr_auto]">
+              {/* LOCATION */}
+              <div className="relative min-w-0">
+                <div className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2">
+                  <MapPin
+                    size={19}
+                    style={{
+                      color: theme.colors.primary,
+                    }}
+                  />
                 </div>
 
-                {/* Category */}
-                <div className="relative">
-                  <label
-                    htmlFor="hero-category"
-                    className="sr-only"
-                  >
-                    Select category
-                  </label>
-
-                  <div className="flex h-14 items-center rounded-2xl bg-background px-4">
-                    <Sparkles className="mr-3 h-5 w-5 shrink-0 text-gold" />
-
-                    <div className="min-w-0 flex-1">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-                        What are you looking for?
-                      </p>
-
-                      <select
-                        id="hero-category"
-                        value={category}
-                        onChange={(event) =>
-                          setCategory(event.target.value)
-                        }
-                        className="mt-0.5 w-full appearance-none bg-transparent text-sm font-medium text-foreground outline-none"
-                      >
-                        <option value="">Choose category</option>
-
-                        {categories.map((item) => (
-                          <option key={item} value={item}>
-                            {item}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <ChevronDown className="h-4 w-4 shrink-0 text-muted" />
-                  </div>
-                </div>
-
-                {/* Search Button */}
-                <Link
-                  href={searchHref}
-                  className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-primary px-7 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-lg"
+                <Combobox
+                  value={location}
+                  onValueChange={(value) => {
+                    setLocation(value ?? "");
+                  }}
                 >
-                  <Search className="h-4 w-4" />
-                  <span>Search Vendors</span>
-                </Link>
+                  <ComboboxInput
+                    placeholder="Where is your wedding?"
+                    className="h-14 w-full rounded-xl border-0 bg-[#fffaf7] pl-11 pr-10 text-sm font-medium text-stone-800 shadow-none outline-none placeholder:text-stone-400 focus-visible:ring-2 focus-visible:ring-[#b23a5b]/20"
+                  />
+
+                  {!location && (
+                    <ChevronDown
+                      size={17}
+                      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-stone-400"
+                    />
+                  )}
+
+                  <ComboboxContent
+                    className="z-[100] w-[240px] rounded-xl border border-stone-200 bg-white p-1 shadow-xl"
+                    align="start"
+                    sideOffset={6}
+                  >
+                    <ComboboxList className="max-h-[240px] overflow-y-auto">
+                      {locations.map((item) => (
+                        <ComboboxItem
+                          key={item.id}
+                          value={item.id}
+                          className="cursor-pointer rounded-lg px-3 py-3 text-sm text-stone-700 outline-none data-[highlighted]:bg-[#f9e8ed] data-[highlighted]:text-[#8f2947]"
+                        >
+                          <span className="flex min-w-0 flex-1 items-center gap-3">
+                            <MapPin
+                              size={16}
+                              className="shrink-0 text-stone-400"
+                            />
+
+                            <span className="truncate">
+                              {item.name}
+                            </span>
+                          </span>
+
+                          {location === item.id && (
+                            <Check
+                              size={16}
+                              className="shrink-0"
+                              style={{
+                                color: theme.colors.primary,
+                              }}
+                            />
+                          )}
+                        </ComboboxItem>
+                      ))}
+
+                      <ComboboxEmpty className="px-3 py-3 text-sm text-stone-500">
+                        No location found.
+                      </ComboboxEmpty>
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
               </div>
+
+              {/* CATEGORY */}
+              <div className="relative min-w-0">
+                <div className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2">
+                  <Search
+                    size={19}
+                    style={{
+                      color: theme.colors.primary,
+                    }}
+                  />
+                </div>
+
+                <Combobox
+                  value={category}
+                  onValueChange={(value) => {
+                    setCategory(value ?? "");
+                  }}
+                >
+                  <ComboboxInput
+                    placeholder="What are you looking for?"
+                    className="h-14 w-full rounded-xl border-0 bg-[#fffaf7] pl-11 pr-10 text-sm font-medium text-stone-800 shadow-none outline-none placeholder:text-stone-400 focus-visible:ring-2 focus-visible:ring-[#b23a5b]/20"
+                  />
+
+                  {!category && (
+                    <ChevronDown
+                      size={17}
+                      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-stone-400"
+                    />
+                  )}
+
+                  <ComboboxContent
+                    className="z-[100] w-[240px] rounded-xl border border-stone-200 bg-white p-1 shadow-xl"
+                    align="start"
+                    sideOffset={6}
+                  >
+                    <ComboboxList className="max-h-[240px] overflow-y-auto">
+                      {categories.map((item) => (
+                        <ComboboxItem
+                          key={item.id}
+                          value={item.id}
+                          className="cursor-pointer rounded-lg px-3 py-3 text-sm text-stone-700 outline-none data-[highlighted]:bg-[#f9e8ed] data-[highlighted]:text-[#8f2947]"
+                        >
+                          <span className="flex min-w-0 flex-1 items-center gap-3">
+                            <Search
+                              size={16}
+                              className="shrink-0 text-stone-400"
+                            />
+
+                            <span className="truncate">
+                              {item.name}
+                            </span>
+                          </span>
+
+                          {category === item.id && (
+                            <Check
+                              size={16}
+                              className="shrink-0"
+                              style={{
+                                color: theme.colors.primary,
+                              }}
+                            />
+                          )}
+                        </ComboboxItem>
+                      ))}
+
+                      <ComboboxEmpty className="px-3 py-3 text-sm text-stone-500">
+                        No category found.
+                      </ComboboxEmpty>
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
+              </div>
+
+              {/* SEARCH BUTTON */}
+              <LoadingLink
+                href={searchHref}
+                className="h-14 w-full rounded-xl px-7 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg lg:w-auto"
+                style={{
+                  backgroundColor: theme.colors.primary,
+                }}
+              >
+                <span>Search Vendors</span>
+
+                <ArrowRight
+                  size={17}
+                  className="ml-2"
+                />
+              </LoadingLink>
             </div>
-          </Reveal>
 
-          {/* Bottom text */}
-          <Reveal direction="up" delay={500}>
-            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/75">
-              <span>Popular:</span>
+            {/* Selected filters */}
+            {(selectedLocation || selectedCategory) && (
+              <div className="mt-3 flex flex-wrap items-center gap-2 px-1">
+                {selectedLocation && (
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-[#f9e8ed] px-3 py-1.5 text-xs font-medium text-[#8f2947]">
+                    <MapPin size={13} />
+                    {selectedLocation.name}
+                  </div>
+                )}
 
-              <Link
-                href="/vendors?category=Wedding%20Venues"
-                className="border-b border-white/30 pb-0.5 transition hover:border-white hover:text-white"
-              >
-                Wedding Venues
-              </Link>
+                {selectedCategory && (
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-[#f9e8ed] px-3 py-1.5 text-xs font-medium text-[#8f2947]">
+                    <Search size={13} />
+                    {selectedCategory.name}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
-              <Link
-                href="/vendors?category=Photographers"
-                className="border-b border-white/30 pb-0.5 transition hover:border-white hover:text-white"
-              >
-                Photographers
-              </Link>
+          {/* Popular searches */}
+          <div className="mt-7">
+            <div className="mb-3 flex items-center gap-2 text-sm text-white/70">
+              <CalendarDays size={15} />
 
-              <Link
-                href="/vendors?category=Makeup%20Artists"
-                className="border-b border-white/30 pb-0.5 transition hover:border-white hover:text-white"
-              >
-                Makeup Artists
-              </Link>
+              <span>Popular searches</span>
             </div>
-          </Reveal>
+
+            <div className="flex flex-wrap gap-2">
+              {categories.slice(0, 5).map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setCategory(item.id)}
+                  className="rounded-full border px-4 py-2 text-xs font-medium text-white transition hover:bg-white hover:text-stone-800"
+                  style={{
+                    borderColor: "rgba(255,255,255,0.28)",
+                    backgroundColor: "rgba(255,255,255,0.08)",
+                  }}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Bottom brand mark */}
-      <div className="absolute bottom-5 right-5 hidden text-right text-white/60 sm:block">
-        <p className="font-display text-lg italic">
-          {theme.brand.name}
-        </p>
-        <p className="text-[9px] uppercase tracking-[0.25em]">
-          Wedding Marketplace
-        </p>
-      </div>
+      {/* Bottom fade */}
+      <div
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-28"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(255,250,247,1), rgba(255,250,247,0))",
+        }}
+      />
     </section>
   );
 }

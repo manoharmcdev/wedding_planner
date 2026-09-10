@@ -1,4 +1,5 @@
 import vendorsData from "@/data/vendors.json";
+
 import type { Vendor } from "@/types/vendor";
 
 const vendors = vendorsData as Vendor[];
@@ -14,5 +15,11 @@ export async function getFeaturedVendors(): Promise<Vendor[]> {
 export async function getVendorBySlug(
   slug: string,
 ): Promise<Vendor | undefined> {
-  return vendors.find((vendor) => vendor.slug === slug);
+  const normalizedSlug = decodeURIComponent(slug)
+    .trim()
+    .toLowerCase();
+
+  return vendors.find(
+    (vendor) => vendor.slug.trim().toLowerCase() === normalizedSlug,
+  );
 }
