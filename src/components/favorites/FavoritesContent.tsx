@@ -71,8 +71,8 @@ export default function FavoritesContent() {
                 </h1>
 
                 <p className="mt-2 max-w-[600px] text-sm leading-6 text-stone-500 sm:text-base">
-                  Keep track of the wedding vendors you love and come back
-                  to them whenever you are ready.
+                  Keep track of the wedding vendors you love and
+                  come back to them whenever you are ready.
                 </p>
               </div>
 
@@ -87,7 +87,10 @@ export default function FavoritesContent() {
 
                   <span>
                     {vendors.length}{" "}
-                    {vendors.length === 1 ? "vendor" : "vendors"} saved
+                    {vendors.length === 1
+                      ? "vendor"
+                      : "vendors"}{" "}
+                    saved
                   </span>
                 </div>
               )}
@@ -142,8 +145,9 @@ export default function FavoritesContent() {
               </h2>
 
               <p className="mt-3 max-w-[500px] text-sm leading-6 text-stone-500 sm:text-base">
-                Start exploring wedding vendors and save the ones you love.
-                Your favorite vendors will appear here.
+                Start exploring wedding vendors and save the
+                ones you love. Your favorite vendors will appear
+                here.
               </p>
 
               <LoadingLink
@@ -178,27 +182,28 @@ export default function FavoritesContent() {
                 <article className="group overflow-hidden rounded-2xl border border-[#eadfd9] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                   {/* Image */}
                   <div className="relative h-[260px] overflow-hidden">
-                    {vendor.image ? (
+                    <LoadingLink
+                      href={`/vendors/${vendor.slug}`}
+                      className="group/image block h-full w-full"
+                    >
                       <Image
-                        src={vendor.image}
+                        src={vendor.coverImage}
                         alt={vendor.name}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 group-hover/image:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
-                    ) : (
-                      <div className="flex h-full items-center justify-center bg-stone-100 text-sm text-stone-400">
-                        No image available
-                      </div>
-                    )}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                    </LoadingLink>
 
                     {/* Favorite */}
                     <button
                       type="button"
                       aria-label={`Remove ${vendor.name} from favorites`}
-                      onClick={() => handleRemove(vendor.id)}
+                      onClick={() =>
+                        handleRemove(vendor.id)
+                      }
                       className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-[#b23a5b] shadow-md backdrop-blur-sm transition hover:scale-105"
                     >
                       <Heart
@@ -238,7 +243,7 @@ export default function FavoritesContent() {
                       <div className="flex shrink-0 items-center gap-1 rounded-full bg-[#fff7e8] px-2.5 py-1 text-xs font-semibold text-stone-700">
                         <Star
                           size={13}
-                          fill={theme.colors.gold}
+                          fill="currentColor"
                           style={{
                             color: theme.colors.gold,
                           }}
@@ -248,6 +253,7 @@ export default function FavoritesContent() {
                       </div>
                     </div>
 
+                    {/* Location + reviews */}
                     <div className="mt-3 flex items-center gap-1.5 text-sm text-stone-500">
                       <MapPin size={15} />
 
@@ -256,20 +262,23 @@ export default function FavoritesContent() {
                       </span>
 
                       <span className="shrink-0">
-                        ({vendor.reviews} reviews)
+                        ({vendor.reviewCount} reviews)
                       </span>
                     </div>
 
+                    {/* Description */}
                     <p className="mt-4 line-clamp-2 text-sm leading-6 text-stone-500">
                       {vendor.description}
                     </p>
 
+                    {/* Actions */}
                     <div className="mt-5 grid grid-cols-[1fr_auto] gap-2">
                       <LoadingLink
                         href={`/vendors/${vendor.slug}`}
                         className="h-11 rounded-xl px-4 text-sm font-semibold text-white"
                         style={{
-                          backgroundColor: theme.colors.primary,
+                          backgroundColor:
+                            theme.colors.primary,
                         }}
                       >
                         View Vendor
@@ -281,7 +290,9 @@ export default function FavoritesContent() {
 
                       <button
                         type="button"
-                        onClick={() => handleRemove(vendor.id)}
+                        onClick={() =>
+                          handleRemove(vendor.id)
+                        }
                         aria-label={`Remove ${vendor.name}`}
                         className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#eadfd9] text-stone-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-600"
                       >
